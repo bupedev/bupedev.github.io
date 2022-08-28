@@ -10,8 +10,8 @@ description: >-
   and my daughter, I enjoy creative coding and making generative art. 
 
 domain: bupe.dev
-baseurl: ""
-url: https://bupe.dev
+baseurl: /bupedev.github.io
+url: http://bupedev.github.io
 
 socials:
   - 
