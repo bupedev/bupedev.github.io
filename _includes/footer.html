@@ -7,9 +7,9 @@
         <p class="footer-copyright" width="100%">Copyright &copy; {{ 'now' | date: "%Y" }}, Ben Lewis</p>
         {% for social in site.socials %}
           {% if social.name == "E-Mail" %}
-            <a class="footer-social-icon" href="//{{social.url}}{{social.id}}"><i class="{{social.icon}}"></i></a>
-          {% else %}
             <a class="footer-social-icon" href="{{social.url}}{{social.id}}"><i class="{{social.icon}}"></i></a>
+          {% else %}
+            <a class="footer-social-icon" href="//{{social.url}}{{social.id}}"><i class="{{social.icon}}"></i></a>
           {% endif %}
         {% endfor %}
       </div>
