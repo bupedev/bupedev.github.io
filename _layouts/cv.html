@@ -5,7 +5,7 @@ layout: default
     {% if image.path contains 'assets/images' %}
         {% if image.basename contains 'profile' %}
             <div class="profile-header">
-                <img src="{{image.path}}" class="profile-image" />
+                <img src="{{image.path}}" class="cv-profile-image" />
             </div>
         {% endif %}
     {% endif %}
@@ -16,16 +16,20 @@ layout: default
         
         <div style="display: flex-wrap;">
             <div style="max-width: 500px; float: left; margin: 5px"> 
-                <h2 class="close-header">{{site.author}}</h2>
+                <h2 class="cv-close-header">{{site.author}}</h2>
                 <h3>{{page.job_title}}</h3>
                 <p>{{page.introduction}}</p>
             </div>
             <div style="padding: 5px;" align="right"> 
-                <p><a class="inherits_color" href="mailto:{{site.email}}">{{site.email}}&nbsp;&nbsp;<i class='fa fa-envelope'></i></a></p>
+                <p><a class="inherits-color" href="mailto:{{site.email}}">{{site.email}}&nbsp;&nbsp;<i class='fa fa-envelope'></i></a></p>
                 <p>{{site.phone}}&nbsp;&nbsp;<i class="fa-solid fa-phone"></i></p>
                 <p>{{site.location}}&nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i></p>
-                <p><a class="inherits_color" href="{{site.url}}">{{site.domain}}&nbsp;&nbsp;<i class="fa-solid fa-globe"></i></a></p>
-                <p><a class="inherits_color" href="https://www.linkedin.com/in/{{site.linkedin_username}}">linkedin.com/in/{{site.linkedin_username}}&nbsp;&nbsp;<i class="fa-brands fa-linkedin-in"></i></a></p>
+                <p><a class="inherits-color" href="{{site.url}}">{{site.domain}}&nbsp;&nbsp;<i class="fa-solid fa-globe"></i></a></p>
+                {% for social in site.socials %}
+                    {% if social.name == "LinkedIn" %}
+                        <p><a class="inherits-color" href="//{{social.url}}{{social.id}}">{{social.url}}{{social.id}}&nbsp;&nbsp;<i class="{{social.icon}}"></i></a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -38,8 +42,8 @@ layout: default
 
 {% for entry in site.cv reversed %}
     {% if entry.path contains 'education' %}
-    <h3 class="close-header">{{entry.title}}</h3>
-    <p class="close-header">{{entry.location}}</p>
+    <h3 class="cv-close-header">{{entry.title}}</h3>
+    <p class="cv-close-header">{{entry.location}}</p>
     <sup>{{entry.start_date}} - {{entry.end_date}}</sup>
     {{entry.content}}
     {% endif %}
@@ -52,8 +56,8 @@ layout: default
 
 {% for entry in site.cv reversed %}
     {% if entry.path contains 'work' %}
-        <h3 class="close-header">{{entry.title}}</h3>
-        <p class="close-header">{{entry.location}}</p>
+        <h3 class="cv-close-header">{{entry.title}}</h3>
+        <p class="cv-close-header">{{entry.location}}</p>
         <sup>{{entry.start_date}} - {{entry.end_date}}</sup>
         {{entry.content}}
     {% endif %}
@@ -66,8 +70,8 @@ layout: default
 
 {% for entry in site.cv reversed %}
     {% if entry.path contains 'volunteer' %}
-        <h3 class="close-header">{{entry.title}}</h3>
-        <p class="close-header">{{entry.location}}</p>
+        <h3 class="cv-close-header">{{entry.title}}</h3>
+        <p class="cv-close-header">{{entry.location}}</p>
         <sup>{{entry.start_date}} - {{entry.end_date}}</sup>
         {{entry.content}}
     {% endif %}
@@ -80,7 +84,7 @@ layout: default
 
 <div>
     {% for tool in page.programming_tools %}
-        <div class="skill-box">{{tool}}</div>
+        <div class="cv-skill-box">{{tool}}</div>
     {% endfor %}
 </div>
 
@@ -91,11 +95,11 @@ layout: default
 <h2>Languages</h2>
 
 <div style="width: 50%; float: left;" align="center"> 
-    <p class="close-header">English</p>
+    <p class="cv-close-header">English</p>
     <sup>Native</sup>
 </div>
 <div style="margin-left: 50%;"  align="center"> 
-    <p class="close-header">Japanese</p>
+    <p class="cv-close-header">Japanese</p>
     <sup>Limited Working Proficiency</sup>
 </div>
 

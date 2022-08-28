@@ -1,0 +1,19 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div style="text-align: center;">
+        <p class="footer-copyright" width="100%">Copyright &copy; {{ 'now' | date: "%Y" }}, Ben Lewis</p>
+        {% for social in site.socials %}
+          {% if social.name == "E-Mail" %}
+            <a class="footer-social-icon" href="//{{social.url}}{{social.id}}"><i class="{{social.icon}}"></i></a>
+          {% else %}
+            <a class="footer-social-icon" href="{{social.url}}{{social.id}}"><i class="{{social.icon}}"></i></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</footer>

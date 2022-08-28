@@ -13,12 +13,33 @@ domain: bupe.dev
 baseurl: ""
 url: https://bupe.dev
 
-linkedin_username: lewisbj
-instagram_username: bupedev
-twitter_username: bupedev
-github_username:  bupedev
+socials:
+  - 
+      name: LinkedIn
+      id: lewisbj
+      url: linkedin.com/in/
+      icon: fa-brands fa-linkedin
+  - 
+      name: Twitter
+      id: bupedev
+      url: twitter.com/
+      icon: fa-brands fa-square-twitter
+  - 
+      name: Instagram
+      id: bupedev
+      url: instagram.com/
+      icon: fa-brands fa-square-instagram
+  - 
+      name: Github
+      id: bupedev
+      url: github.com/
+      icon: fa-brands fa-square-github
+  -
+      name: E-Mail
+      id: "ben@bupe.dev"
+      url: "mailto:"
+      icon: fa-solid fa-square-envelope
 
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
