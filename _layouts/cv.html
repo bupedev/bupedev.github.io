@@ -13,17 +13,20 @@ layout: default
 
 <div class="cv">
     <div style="width: 100%; overflow: hidden;">
-        <div style="width: 67%; float: left;"> 
-            <h2 class="close-header">{{site.author}}</h2>
-            <h3>{{page.job_title}}</h3>
-            <p>{{page.introduction}}</p>
-        </div>
-        <div style="margin-left: 70%;" align="right"> 
-            <p><a class="inherits_color" href="mailto:{{site.email}}">{{site.email}}&nbsp;&nbsp;<i class='fa fa-envelope'></i></a></p>
-            <p>{{site.phone}}&nbsp;&nbsp;<i class="fa-solid fa-phone"></i></p>
-            <p>{{site.location}}&nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i></p>
-            <p><a class="inherits_color" href="{{site.url}}">{{site.domain}}&nbsp;&nbsp;<i class="fa-solid fa-globe"></i></a></p>
-            <p><a class="inherits_color" href="https://www.linkedin.com/in/{{site.linkedin_username}}">linkedin.com/in/{{site.linkedin_username}}&nbsp;&nbsp;<i class="fa-brands fa-linkedin-in"></i></a></p>
+        
+        <div style="display: flex-wrap;">
+            <div style="max-width: 500px; float: left; margin: 5px"> 
+                <h2 class="close-header">{{site.author}}</h2>
+                <h3>{{page.job_title}}</h3>
+                <p>{{page.introduction}}</p>
+            </div>
+            <div style="padding: 5px;" align="right"> 
+                <p><a class="inherits_color" href="mailto:{{site.email}}">{{site.email}}&nbsp;&nbsp;<i class='fa fa-envelope'></i></a></p>
+                <p>{{site.phone}}&nbsp;&nbsp;<i class="fa-solid fa-phone"></i></p>
+                <p>{{site.location}}&nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i></p>
+                <p><a class="inherits_color" href="{{site.url}}">{{site.domain}}&nbsp;&nbsp;<i class="fa-solid fa-globe"></i></a></p>
+                <p><a class="inherits_color" href="https://www.linkedin.com/in/{{site.linkedin_username}}">linkedin.com/in/{{site.linkedin_username}}&nbsp;&nbsp;<i class="fa-brands fa-linkedin-in"></i></a></p>
+            </div>
         </div>
     </div>
 </div>
