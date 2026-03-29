@@ -4,25 +4,26 @@ start_date: Feb 2018
 end_date: Jul 2022
 flags: ["cv", "resume"]
 bullets:
-  - flags: ["cv", "resume"]
-    text: Responsible for designing, creating and marking of assessment
-  - flags: ["cv", "resume"]
-    text: Catered facilitation of student learning experiences
-  - flags: ["cv", "resume"]
-    text: "Delivery of lectures, tutorials and workshops of first through third year units:"
-  - flags: ["cv", "resume"]
-    text: "EGB111: Foundation of Engineering Design"
-  - flags: ["cv", "resume"]
-    text: "MXB100: Introductory Calculus and Algebra"
-  - flags: ["cv", "resume"]
-    text: "MXB101: Probability and Stochastic Modelling"
-  - flags: ["cv", "resume"]
-    text: "MZB125: Introductory Engineering Mathematics"
-  - flags: ["cv", "resume"]
-    text: "MZB126: Engineering Computation"
-  - flags: ["cv", "resume"]
-    text: "CAB201: Programming Principles"
-  - flags: ["cv", "resume"]
-    text: "CAB202: Microprocessors and Digital Systems"
-  - flags: ["cv", "resume"]
-    text: "CAB302: Software Development"
+  - flags: [ "cv", "resume" ]
+    text: Designed, delivered, and marked assessments, tutorials, workshops, and lectures across first- to third-year engineering, mathematics, and computing subjects.
+  - flags: [ "cv", "resume" ]
+    text: Supported student learning through structured teaching and facilitation, helping translate complex technical concepts into clear and practical instruction.
+  - flags: ["cv"]
+    text: Units taught included
+    children:
+      - flags: ["cv"]
+        text: "EGB111: Foundation of Engineering Design"
+      - flags: ["cv"]
+        text: "MXB100: Introductory Calculus and Algebra"
+      - flags: ["cv"]
+        text: "MXB101: Probability and Stochastic Modelling"
+      - flags: ["cv"]
+        text: "MZB125: Introductory Engineering Mathematics"
+      - flags: ["cv"]
+        text: "MZB126: Engineering Computation"
+      - flags: ["cv"]
+        text: "CAB201: Programming Principles"
+      - flags: ["cv"]
+        text: "CAB202: Microprocessors and Digital Systems"
+      - flags: ["cv"]
+        text: "CAB302: Software Development"

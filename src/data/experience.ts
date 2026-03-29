@@ -17,6 +17,12 @@ export interface ExperienceSkillGroup {
   items: string[];
 }
 
+export interface ExperienceBullet {
+  flags: ExposureFlag[];
+  text: string;
+  children?: ExperienceBullet[];
+}
+
 export interface ExperiencePageContent {
   title: string;
   jobTitle: FlaggedValue<string>;
@@ -114,6 +120,16 @@ export function getExperiencePageContent(exposure: ExposureFlag) {
   };
 }
 
+function filterBullet(bullet: ExperienceBullet, exposure: ExposureFlag): ExperienceBullet | null {
+  if (!bullet.flags.includes(exposure)) {
+    return null;
+  }
+
+  const children = bullet.children?.map((child) => filterBullet(child, exposure)).filter((child) => child !== null) ?? [];
+
+  return children.length > 0 ? { ...bullet, children } : { ...bullet, children: undefined };
+}
+
 export async function getExperienceSections(exposure: ExposureFlag) {
   const entries = await getCollection("cv");
 
@@ -126,7 +142,7 @@ export async function getExperienceSections(exposure: ExposureFlag) {
       ...entry,
       data: {
         ...entry.data,
-        bullets: entry.data.bullets.filter((bullet) => bullet.flags.includes(exposure)),
+        bullets: entry.data.bullets.map((bullet) => filterBullet(bullet, exposure)).filter((bullet) => bullet !== null),
       },
     }))
     .filter((entry) => entry.data.bullets.length > 0);

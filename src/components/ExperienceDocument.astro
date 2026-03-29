@@ -1,5 +1,6 @@
 ---
 import { site } from "../data/site";
+import ExperienceBulletList from "./ExperienceBulletList.astro";
 import type { getExperiencePageContent, getExperienceSections, ExposureFlag } from "../data/experience";
 
 interface Props {
@@ -21,26 +22,27 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
     <div class="cv">
       <div class="cv-heading">
         <div class="cv-heading-main">
-          <h2 class="cv-close-header">{site.author}</h2>
-          {page.jobTitle ? <h3>{page.jobTitle}</h3> : null}
-          {page.introduction ? <p>{page.introduction}</p> : null}
-        </div>
-        <div class="cv-heading-side">
-          <p><a class="inherits-color" href={`mailto:${site.email}`}>{site.email}&nbsp;&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i></a></p>
-          <p>{site.phone}&nbsp;&nbsp;<i class="fa-solid fa-phone" aria-hidden="true"></i></p>
-          <p>{site.location}&nbsp;&nbsp;<i class="fa-solid fa-location-dot" aria-hidden="true"></i></p>
-          <p><a class="inherits-color" href={site.url}>{site.domain}&nbsp;&nbsp;<i class="fa-solid fa-globe" aria-hidden="true"></i></a></p>
-          {site.socials
-            .filter((social) => social.name === "LinkedIn")
-            .map((social) => (
+          <div class="cv-name-row">
+            <h2 class="cv-close-header">{site.author}</h2>
+            <div class="cv-contact-row">
               <p>
-                <a class="inherits-color" href={`https://${social.url}${social.id}`}>
-                  {social.url}
-                  {social.id}
-                  &nbsp;&nbsp;<i class={social.icon} aria-hidden="true"></i>
+                <a class="inherits-color" href={`mailto:${site.email}`}>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span>{site.email}</span>
                 </a>
               </p>
-            ))}
+              <p>
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <span>{site.phone}</span>
+              </p>
+              <p>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>{site.location}</span>
+              </p>
+            </div>
+          </div>
+          {page.jobTitle ? <h3>{page.jobTitle}</h3> : null}
+          {page.introduction ? <p>{page.introduction}</p> : null}
         </div>
       </div>
     </div>
@@ -56,11 +58,7 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
             <sup>
               {entry.data.start_date} - {entry.data.end_date}
             </sup>
-            <ul>
-              {entry.data.bullets.map((bullet) => (
-                <li>{bullet.text}</li>
-              ))}
-            </ul>
+            <ExperienceBulletList bullets={entry.data.bullets} />
           </article>
         ))}
       </div>
@@ -77,11 +75,7 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
             <sup>
               {entry.data.start_date} - {entry.data.end_date}
             </sup>
-            <ul>
-              {entry.data.bullets.map((bullet) => (
-                <li>{bullet.text}</li>
-              ))}
-            </ul>
+            <ExperienceBulletList bullets={entry.data.bullets} />
           </article>
         ))}
       </div>
@@ -98,11 +92,7 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
             <sup>
               {entry.data.start_date} - {entry.data.end_date}
             </sup>
-            <ul>
-              {entry.data.bullets.map((bullet) => (
-                <li>{bullet.text}</li>
-              ))}
-            </ul>
+            <ExperienceBulletList bullets={entry.data.bullets} />
           </article>
         ))}
       </div>

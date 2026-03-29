@@ -1,0 +1,18 @@
+---
+import type { ExperienceBullet } from "../data/experience";
+
+interface Props {
+  bullets: ExperienceBullet[];
+}
+
+const { bullets } = Astro.props;
+---
+
+<ul>
+  {bullets.map((bullet) => (
+    <li>
+      {bullet.text}
+      {bullet.children && bullet.children.length > 0 ? <Astro.self bullets={bullet.children} /> : null}
+    </li>
+  ))}
+</ul>
