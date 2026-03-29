@@ -12,11 +12,16 @@ export interface ExperienceLanguage {
   proficiency: string;
 }
 
+export interface ExperienceSkillGroup {
+  title: string;
+  items: string[];
+}
+
 export interface ExperiencePageContent {
   title: string;
   jobTitle: FlaggedValue<string>;
   introduction: FlaggedValue<string>;
-  programmingTools: Array<FlaggedValue<string>>;
+  skillGroups: Array<FlaggedValue<ExperienceSkillGroup>>;
   languages: Array<FlaggedValue<ExperienceLanguage>>;
   closingNote: FlaggedValue<string>;
 }
@@ -32,21 +37,42 @@ export const experiencePage: ExperiencePageContent = {
     value:
       "Senior software engineer with 5+ years of experience designing backend-heavy systems for optimisation and scheduling software. My work focuses on domain modelling, internal DSL design, performance optimisation, and integration test architecture, with end-to-end ownership across architecture, implementation, rollout, and iteration.",
   },
-  programmingTools: [
-    { flags: ["cv", "resume"], value: "C#" },
-    { flags: ["cv", "resume"], value: ".NET" },
-    { flags: ["cv", "resume"], value: "TypeScript" },
-    { flags: ["cv", "resume"], value: "React" },
-    { flags: ["cv", "resume"], value: "WinForms" },
-    { flags: ["cv", "resume"], value: "SQLite" },
-    { flags: ["cv", "resume"], value: "Parquet" },
-    { flags: ["cv", "resume"], value: "Power BI" },
-    { flags: ["cv", "resume"], value: "Git" },
-    { flags: ["cv", "resume"], value: "PowerShell" },
-    { flags: ["cv", "resume"], value: "Jenkins" },
-    { flags: ["cv", "resume"], value: "Azure DevOps" },
-    { flags: ["cv", "resume"], value: "Bitbucket" },
-    { flags: ["cv", "resume"], value: "Jira" },
+  skillGroups: [
+    {
+      flags: ["cv", "resume"],
+      value: {
+        title: "Languages",
+        items: ["C#", "TypeScript", "SQL", "PowerShell"],
+      },
+    },
+    {
+      flags: ["cv", "resume"],
+      value: {
+        title: "Platforms/Frameworks",
+        items: [".NET", "React", "WinForms"],
+      },
+    },
+    {
+      flags: ["cv", "resume"],
+      value: {
+        title: "Data/Storage",
+        items: ["SQLite", "Parquet"],
+      },
+    },
+    {
+      flags: ["cv", "resume"],
+      value: {
+        title: "DevOps/Tooling",
+        items: ["Git", "Azure DevOps", "Bitbucket", "Jenkins", "Jira"],
+      },
+    },
+    {
+      flags: ["cv", "resume"],
+      value: {
+        title: "Testing/Architecture",
+        items: ["integration testing", "domain modeling", "DSL design", "performance optimization"],
+      },
+    },
   ],
   languages: [
     {
@@ -82,7 +108,7 @@ export function getExperiencePageContent(exposure: ExposureFlag) {
     title: exposure === "cv" ? "CV" : "Resume",
     jobTitle: filterFlaggedValue(experiencePage.jobTitle, exposure),
     introduction: filterFlaggedValue(experiencePage.introduction, exposure),
-    programmingTools: filterFlaggedValues(experiencePage.programmingTools, exposure),
+    skillGroups: filterFlaggedValues(experiencePage.skillGroups, exposure),
     languages: filterFlaggedValues(experiencePage.languages, exposure),
     closingNote: filterFlaggedValue(experiencePage.closingNote, exposure),
   };

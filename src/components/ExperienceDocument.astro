@@ -12,20 +12,12 @@ const { exposure, page, sections } = Astro.props;
 
 const hasEntries = sections.education.length > 0 || sections.work.length > 0 || sections.volunteer.length > 0;
 const hasSupplementaryContent =
-  page.programmingTools.length > 0 || page.languages.length > 0 || page.jobTitle || page.introduction || page.closingNote;
+  page.skillGroups.length > 0 || page.languages.length > 0 || page.jobTitle || page.introduction || page.closingNote;
 const isEmpty = !hasEntries && !hasSupplementaryContent;
 ---
 
 {!isEmpty ? (
   <>
-    <div class="profile-header">
-      <img
-        src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
-        class="cv-profile-image"
-        alt={`${site.author} profile photo`}
-      />
-    </div>
-
     <div class="cv">
       <div class="cv-heading">
         <div class="cv-heading-main">
@@ -116,13 +108,16 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
       </div>
     ) : null}
 
-    {page.programmingTools.length > 0 ? (
+    {page.skillGroups.length > 0 ? (
       <div class="cv-section">
         <hr />
-        <h2>Programming Tools</h2>
-        <div>
-          {page.programmingTools.map((tool) => (
-            <div class="cv-skill-box">{tool}</div>
+        <h2>Technical Focus</h2>
+        <div class="experience-skill-groups">
+          {page.skillGroups.map((group) => (
+            <div class="experience-skill-group">
+              <p class="experience-skill-group-title">{group.title}:</p>
+              <p class="experience-skill-group-items">{group.items.join(", ")}</p>
+            </div>
           ))}
         </div>
       </div>

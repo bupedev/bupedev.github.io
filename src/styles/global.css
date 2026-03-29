@@ -325,7 +325,7 @@ table td {
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 .cv-heading-main {
@@ -352,6 +352,7 @@ table td {
 .cv-actions {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 24px;
 }
 
 .cv-download-button,
@@ -382,12 +383,25 @@ table td {
   page-break-inside: avoid;
 }
 
-.cv-skill-box {
-  display: inline-block;
-  margin: 5px;
-  background-color: hsl(0deg 0% 90%);
-  border-radius: 20px;
-  padding: 5px 20px;
+.experience-skill-groups {
+  display: grid;
+  gap: 8px;
+}
+
+.experience-skill-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.experience-skill-group-title {
+  margin-bottom: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.experience-skill-group-items {
+  margin-bottom: 0;
 }
 
 .cv-languages {
@@ -410,17 +424,6 @@ table td {
   text-decoration: none;
 }
 
-.cv-print-page .profile-header {
-  margin-bottom: 16px;
-}
-
-.cv-print-page .cv-profile-image {
-  margin-top: 0;
-  margin-bottom: 16px;
-  width: 140px;
-  height: 140px;
-}
-
 .cv-print-page .cv-section {
   margin-top: 20px;
 }
@@ -433,10 +436,6 @@ table td {
   margin-bottom: 8px;
   break-after: avoid;
   page-break-after: avoid;
-}
-
-.cv-print-page .cv-skill-box {
-  background-color: #efefef;
 }
 
 .sr-only {
@@ -668,5 +667,13 @@ table td {
 
   .experience-links {
     grid-template-columns: 1fr;
+  }
+
+  .experience-skill-group {
+    display: block;
+  }
+
+  .experience-skill-group-title {
+    margin-bottom: 2px;
   }
 }
