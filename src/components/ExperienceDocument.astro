@@ -1,0 +1,160 @@
+---
+import { site } from "../data/site";
+import type { getExperiencePageContent, getExperienceSections, ExposureFlag } from "../data/experience";
+
+interface Props {
+  exposure: ExposureFlag;
+  page: ReturnType<typeof getExperiencePageContent>;
+  sections: Awaited<ReturnType<typeof getExperienceSections>>;
+}
+
+const { exposure, page, sections } = Astro.props;
+
+const hasEntries = sections.education.length > 0 || sections.work.length > 0 || sections.volunteer.length > 0;
+const hasSupplementaryContent =
+  page.programmingTools.length > 0 || page.languages.length > 0 || page.jobTitle || page.introduction || page.closingNote;
+const isEmpty = !hasEntries && !hasSupplementaryContent;
+---
+
+{!isEmpty ? (
+  <>
+    <div class="profile-header">
+      <img
+        src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
+        class="cv-profile-image"
+        alt={`${site.author} profile photo`}
+      />
+    </div>
+
+    <div class="cv">
+      <div class="cv-heading">
+        <div class="cv-heading-main">
+          <h2 class="cv-close-header">{site.author}</h2>
+          {page.jobTitle ? <h3>{page.jobTitle}</h3> : null}
+          {page.introduction ? <p>{page.introduction}</p> : null}
+        </div>
+        <div class="cv-heading-side">
+          <p><a class="inherits-color" href={`mailto:${site.email}`}>{site.email}&nbsp;&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i></a></p>
+          <p>{site.phone}&nbsp;&nbsp;<i class="fa-solid fa-phone" aria-hidden="true"></i></p>
+          <p>{site.location}&nbsp;&nbsp;<i class="fa-solid fa-location-dot" aria-hidden="true"></i></p>
+          <p><a class="inherits-color" href={site.url}>{site.domain}&nbsp;&nbsp;<i class="fa-solid fa-globe" aria-hidden="true"></i></a></p>
+          {site.socials
+            .filter((social) => social.name === "LinkedIn")
+            .map((social) => (
+              <p>
+                <a class="inherits-color" href={`https://${social.url}${social.id}`}>
+                  {social.url}
+                  {social.id}
+                  &nbsp;&nbsp;<i class={social.icon} aria-hidden="true"></i>
+                </a>
+              </p>
+            ))}
+        </div>
+      </div>
+    </div>
+
+    {sections.education.length > 0 ? (
+      <div class="cv-section">
+        <hr />
+        <h2>Education</h2>
+        {sections.education.map((entry) => (
+          <article class="cv-entry">
+            <h3 class="cv-close-header">{entry.data.title}</h3>
+            <p class="cv-close-header">{entry.data.location}</p>
+            <sup>
+              {entry.data.start_date} - {entry.data.end_date}
+            </sup>
+            <ul>
+              {entry.data.bullets.map((bullet) => (
+                <li>{bullet.text}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    ) : null}
+
+    {sections.work.length > 0 ? (
+      <div class="cv-section">
+        <hr />
+        <h2>Work Experience</h2>
+        {sections.work.map((entry) => (
+          <article class="cv-entry">
+            <h3 class="cv-close-header">{entry.data.title}</h3>
+            <p class="cv-close-header">{entry.data.location}</p>
+            <sup>
+              {entry.data.start_date} - {entry.data.end_date}
+            </sup>
+            <ul>
+              {entry.data.bullets.map((bullet) => (
+                <li>{bullet.text}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    ) : null}
+
+    {sections.volunteer.length > 0 ? (
+      <div class="cv-section">
+        <hr />
+        <h2>Volunteering</h2>
+        {sections.volunteer.map((entry) => (
+          <article class="cv-entry">
+            <h3 class="cv-close-header">{entry.data.title}</h3>
+            <p class="cv-close-header">{entry.data.location}</p>
+            <sup>
+              {entry.data.start_date} - {entry.data.end_date}
+            </sup>
+            <ul>
+              {entry.data.bullets.map((bullet) => (
+                <li>{bullet.text}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    ) : null}
+
+    {page.programmingTools.length > 0 ? (
+      <div class="cv-section">
+        <hr />
+        <h2>Programming Tools</h2>
+        <div>
+          {page.programmingTools.map((tool) => (
+            <div class="cv-skill-box">{tool}</div>
+          ))}
+        </div>
+      </div>
+    ) : null}
+
+    {page.languages.length > 0 ? (
+      <div class="cv-section">
+        <hr />
+        <h2>Languages</h2>
+        <div class="cv-languages">
+          {page.languages.map((language) => (
+            <div>
+              <p class="cv-close-header">{language.name}</p>
+              <sup>{language.proficiency}</sup>
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : null}
+
+    {page.closingNote ? (
+      <div class="cv-section">
+        <hr />
+        <p>
+          <i>{page.closingNote}</i>
+        </p>
+      </div>
+    ) : null}
+  </>
+) : (
+  <div class="experience-empty-state">
+    <h1>{exposure === "cv" ? "CV" : "Resume"}</h1>
+    <p>{exposure === "cv" ? "No CV content is currently available." : "Resume content is being prepared."}</p>
+  </div>
+)}

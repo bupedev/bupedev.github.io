@@ -1,19 +1,12 @@
 ---
 import ExperienceDocument from "../../../components/ExperienceDocument.astro";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PrintLayout from "../../../layouts/PrintLayout.astro";
 import { getExperiencePageContent, getExperienceSections } from "../../../data/experience";
 
 const page = getExperiencePageContent("resume");
 const sections = await getExperienceSections("resume");
-const downloadHref = `${import.meta.env.BASE_URL}generated/ben-lewis-resume.pdf`;
 ---
 
-<BaseLayout title={page.title}>
-  <div class="cv-actions">
-    <a class="cv-download-button" href={downloadHref} download>
-      Download Resume
-    </a>
-  </div>
-
+<PrintLayout title={`${page.title} Print`}>
   <ExperienceDocument exposure="resume" page={page} sections={sections} />
-</BaseLayout>
+</PrintLayout>

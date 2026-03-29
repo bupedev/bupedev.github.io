@@ -1,11 +1,12 @@
 ---
-import CvDocument from "../../../components/CvDocument.astro";
+import ExperienceDocument from "../../../components/ExperienceDocument.astro";
 import PrintLayout from "../../../layouts/PrintLayout.astro";
-import { cvPage, getCvSections } from "../../../data/cv";
+import { getExperiencePageContent, getExperienceSections } from "../../../data/experience";
 
-const sections = await getCvSections();
+const page = getExperiencePageContent("cv");
+const sections = await getExperienceSections("cv");
 ---
 
-<PrintLayout title={`${cvPage.title} Print`}>
-  <CvDocument cvPage={cvPage} sections={sections} />
+<PrintLayout title={`${page.title} Print`}>
+  <ExperienceDocument exposure="cv" page={page} sections={sections} />
 </PrintLayout>

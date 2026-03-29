@@ -7,14 +7,27 @@ import { promisify } from "node:util";
 import { chromium } from "playwright";
 
 const distDir = path.resolve("dist");
-const distOutputFile = path.join(distDir, "generated", "ben-lewis-cv.pdf");
-const publicOutputFile = path.resolve("public", "generated", "ben-lewis-cv.pdf");
 const basePath = normalizeBasePath(process.env.BASE_PATH || "/");
 const port = Number(process.env.PDF_PORT || "4173");
 const execFileAsync = promisify(execFile);
 
-await fs.mkdir(path.dirname(distOutputFile), { recursive: true });
-await fs.mkdir(path.dirname(publicOutputFile), { recursive: true });
+const pdfTargets = [
+  {
+    route: "experience/cv/print/",
+    filename: "ben-lewis-cv.pdf",
+  },
+  {
+    route: "experience/resume/print/",
+    filename: "ben-lewis-resume.pdf",
+  },
+];
+
+await Promise.all(
+  pdfTargets.flatMap(() => [
+    fs.mkdir(path.join(distDir, "generated"), { recursive: true }),
+    fs.mkdir(path.resolve("public", "generated"), { recursive: true }),
+  ]),
+);
 
 const server = http.createServer(async (req, res) => {
   try {
@@ -31,42 +44,67 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
+await new Promise((resolve, reject) => {
+  server.once("error", reject);
+  server.listen(port, "127.0.0.1", resolve);
+});
 
 try {
   const browserExecutablePath = getBrowserExecutablePath();
-  const printUrl = `http://127.0.0.1:${port}${basePath}experience/cv/print/`;
 
   if (browserExecutablePath?.toLowerCase().endsWith(".exe")) {
-    await generatePdfViaCli(browserExecutablePath, printUrl, distOutputFile);
+    for (const target of pdfTargets) {
+      await generatePdfViaCli(
+        browserExecutablePath,
+        `http://127.0.0.1:${port}${basePath}${target.route}`,
+        getDistOutputFile(target.filename),
+      );
+    }
   } else {
     const browser = await chromium.launch({
       executablePath: browserExecutablePath,
     });
-    const page = await browser.newPage();
 
-    await page.goto(printUrl, {
-      waitUntil: "networkidle",
-    });
+    try {
+      for (const target of pdfTargets) {
+        const page = await browser.newPage();
 
-    await page.pdf({
-      path: distOutputFile,
-      format: "A4",
-      printBackground: true,
-      margin: {
-        top: "12mm",
-        right: "12mm",
-        bottom: "12mm",
-        left: "12mm",
-      },
-    });
+        await page.goto(`http://127.0.0.1:${port}${basePath}${target.route}`, {
+          waitUntil: "networkidle",
+        });
 
-    await browser.close();
+        await page.pdf({
+          path: getDistOutputFile(target.filename),
+          format: "A4",
+          printBackground: true,
+          margin: {
+            top: "12mm",
+            right: "12mm",
+            bottom: "12mm",
+            left: "12mm",
+          },
+        });
+
+        await page.close();
+      }
+    } finally {
+      await browser.close();
+    }
   }
 
-  await fs.copyFile(distOutputFile, publicOutputFile);
+  await Promise.all(
+    pdfTargets.map((target) => fs.copyFile(getDistOutputFile(target.filename), getPublicOutputFile(target.filename))),
+  );
 } finally {
   await new Promise((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
+}
+
+function getDistOutputFile(filename) {
+  return path.join(distDir, "generated", filename);
+}
+
+function getPublicOutputFile(filename) {
+  return path.resolve("public", "generated", filename);
 }
 
 function normalizeBasePath(value) {

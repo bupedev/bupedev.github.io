@@ -1,0 +1,12 @@
+title: Bachelor of Mathematics and Bachelor of Engineering (Honours)
+location: Queensland University of Technology
+start_date: Feb 2015
+end_date: Nov 2021
+flags: ["cv", "resume"]
+bullets:
+  - flags: ["cv", "resume"]
+    text: Major in applied/computation mathematics and computer/software engineering
+  - flags: ["cv", "resume"]
+    text: "Honors thesis topic: Exploring Parallel Periodic Distance Transform Algorithms"
+  - flags: ["cv", "resume"]
+    text: "Grade point average of 6.3"

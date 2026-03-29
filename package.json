@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/generate-cv-pdf.mjs",
+    "build": "astro build && node scripts/generate-experience-pdfs.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },

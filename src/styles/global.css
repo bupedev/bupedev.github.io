@@ -308,6 +308,10 @@ table td {
   margin-bottom: 8px;
 }
 
+.experience-empty-state {
+  margin-top: 20px;
+}
+
 .inherits-color,
 .inherits-color:visited {
   color: inherit;
