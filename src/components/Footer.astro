@@ -1,0 +1,23 @@
+---
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer h-card">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-inner">
+        <p class="footer-copyright">Copyright &copy; {year}, {site.author}</p>
+        <div>
+          {site.socials.map((social) => (
+            <a class="footer-social-icon" href={social.name === "E-Mail" ? `${social.url}${social.id}` : `https://${social.url}${social.id}`}>
+              <i class={social.icon} aria-hidden="true"></i>
+              <span class="sr-only">{social.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
