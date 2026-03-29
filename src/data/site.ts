@@ -5,7 +5,7 @@ export const site = {
   phone: "(+61) 439 833 763",
   location: "Brisbane, Australia",
   description:
-    "Software engineer from Brisbane, Australia, currently building strategic mine planning software for Deswik. When I am not spending time with my wife and my daughter, I enjoy creative coding and making generative art.",
+    "Software engineer from Brisbane, Australia, currently building strategic mine planning software for Deswik. When I am not spending time with my wife and two beautiful children, I enjoy creative coding and making generative art.",
   domain: "bupe.dev",
   url: "https://bupe.dev",
   socials: [

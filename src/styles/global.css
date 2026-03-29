@@ -321,6 +321,44 @@ table td {
   margin-bottom: 10px;
 }
 
+.home-intro {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.home-profile-image {
+  flex: 0 0 auto;
+  margin: 0;
+  border-radius: 50%;
+  width: 196px;
+  height: 196px;
+  object-fit: cover;
+}
+
+.home-intro p {
+  margin-bottom: 0;
+}
+
+.home-art-feature {
+  margin-top: 28px;
+  margin-left: auto;
+  max-width: 100%;
+  text-align: right;
+}
+
+.home-art-feature-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-art-feature-caption {
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: var(--grey-color);
+}
+
 .cv-heading {
   display: block;
 }
@@ -685,6 +723,20 @@ table td {
 
   .cv-heading {
     display: block;
+  }
+
+  .home-profile-image {
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  .home-intro {
+    display: block;
+  }
+
+  .home-art-feature {
+    margin-right: auto;
+    text-align: center;
   }
 
   .cv-name-row {

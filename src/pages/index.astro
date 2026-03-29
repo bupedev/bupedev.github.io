@@ -3,19 +3,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Home">
-  <div class="profile-header">
+  <div class="home-intro">
     <img
       src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
-      class="cv-profile-image"
+      class="home-profile-image"
       alt="Ben Lewis profile photo"
     />
+
+    <p>
+      My name is Ben Lewis but my wife calls me Bupé, I am a software engineer from Brisbane, Australia, currently building strategic mine
+      planning software for <a href="https://www.deswik.com/">Deswik</a>. I studied at QUT where I completed two
+      degrees, a Bachelor of Mathematics and a Bachelor of Engineering. When I am not spending time with my wife and my
+      two (soon to be three) beautiful kids, I enjoy creative coding and making generative art. This little corner of
+      the internet is for me to share myself.
+    </p>
   </div>
 
-  <p>
-    My name is Ben Lewis, I am a software engineer from Brisbane, Australia, currently building strategic mine planning
-    software for <a href="https://www.deswik.com/">Deswik</a>. I studied at QUT where I completed two degrees, a
-    Bachelor of Mathematics and a Bachelor of Engineering. When I am not spending time with my wife and my daughter, I
-    enjoy creative coding and making generative art. This little corner of the internet is for me to share my
-    learnings and creations.
-  </p>
+  <figure class="home-art-feature">
+    <a href="https://www.fxhash.xyz/iteration/hatchet:-magarikuneri-50">
+      <img
+        src={`${import.meta.env.BASE_URL}assets/images/art/hatchet_magarikuneri_n050.png`}
+        class="home-art-feature-image"
+        alt="Hatchet: Magarikuneri #50"
+      />
+    </a>
+    <figcaption class="home-art-feature-caption">
+      <a href="https://www.fxhash.xyz/iteration/hatchet:-magarikuneri-50">Hatchet: Magarikuneri #50</a>
+    </figcaption>
+  </figure>
 </BaseLayout>
