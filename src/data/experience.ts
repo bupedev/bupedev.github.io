@@ -35,7 +35,7 @@ export const experiencePage: ExperiencePageContent = {
   introduction: {
     flags: ["cv", "resume"],
     value:
-      "Senior software engineer with 5+ years of experience designing backend-heavy systems for optimisation and scheduling software. My work focuses on domain modelling, internal DSL design, performance optimisation, and integration test architecture, with end-to-end ownership across architecture, implementation, rollout, and iteration.",
+      "Senior software engineer with 5+ years of experience building backend and platform capabilities for optimisation and planning software. I specialise in domain modelling, internal DSL and expression system design, performance optimisation, and integration test architecture, with a track record of turning complex technical problems into reliable, scalable product capabilities. I work across architecture, implementation, rollout, and iteration, and have led initiatives that improved runtime performance, strengthened regression coverage, and enabled reuse across multiple products.",
   },
   skillGroups: [
     {
