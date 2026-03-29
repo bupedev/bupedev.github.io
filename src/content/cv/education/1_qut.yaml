@@ -5,8 +5,8 @@ end_date: Nov 2021
 flags: ["cv", "resume"]
 bullets:
   - flags: ["cv", "resume"]
-    text: Major in applied/computation mathematics and computer/software engineering
+    text: Majors in Applied and Computational Mathematics, and Computer and Software Engineering
   - flags: ["cv", "resume"]
-    text: "Honors thesis topic: Exploring Parallel Periodic Distance Transform Algorithms"
-  - flags: ["cv", "resume"]
+    text: "Honours thesis topic: Exploring Parallel Periodic Distance Transform Algorithms"
+  - flags: ["cv"]
     text: "Grade point average of 6.3"

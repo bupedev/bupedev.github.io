@@ -75,8 +75,8 @@ export const experiencePage: ExperiencePageContent = {
     {
       flags: ["cv", "resume"],
       value: {
-        title: "Testing/Architecture",
-        items: ["integration testing", "domain modeling", "performance optimization"],
+        title: "Specialties",
+        items: ["Domain modelling", "internal DSL design", "integration testing", "performance optimisation"],
       },
     },
   ],

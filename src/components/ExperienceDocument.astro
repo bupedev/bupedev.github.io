@@ -47,11 +47,11 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
       </div>
     </div>
 
-    {sections.education.length > 0 ? (
+    {sections.work.length > 0 ? (
       <div class="cv-section">
         <hr />
-        <h2>Education</h2>
-        {sections.education.map((entry) => (
+        <h2>Work Experience</h2>
+        {sections.work.map((entry) => (
           <article class="cv-entry">
             <h3 class="cv-close-header">{entry.data.title}</h3>
             <p class="cv-close-header">{entry.data.location}</p>
@@ -64,11 +64,11 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
       </div>
     ) : null}
 
-    {sections.work.length > 0 ? (
+    {sections.education.length > 0 ? (
       <div class="cv-section">
         <hr />
-        <h2>Work Experience</h2>
-        {sections.work.map((entry) => (
+        <h2>Education</h2>
+        {sections.education.map((entry) => (
           <article class="cv-entry">
             <h3 class="cv-close-header">{entry.data.title}</h3>
             <p class="cv-close-header">{entry.data.location}</p>

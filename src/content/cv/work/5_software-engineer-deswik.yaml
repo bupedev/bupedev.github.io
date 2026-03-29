@@ -17,8 +17,8 @@ bullets:
   - flags: ["cv", "resume"]
     text: Designed and implemented integrations that enabled cost- and constraint-aware destination scheduling, helping deliver a key capability for end-to-end mine planning workflows.
   - flags: ["cv", "resume"]
-    text: Optimised parcel-flow calculations over large multidimensional datasets by modelling dependencies as a graph, parallelizing evaluation, and caching analysis results, reducing a representative client workflow from hours to seconds.
+    text: Optimised parcel-flow calculations over large multidimensional datasets by modelling dependencies as a graph, parallelising evaluation, and caching analysis results, reducing a representative client workflow from almost 2 hours to 11 seconds.
   - flags: ["cv", "resume"]
-    text: Designed and introduced an integration testing framework and synthetic model generator that increased meaningful integration test coverage from roughly 10 to 20 tests to more than 890, significantly improving regression protection across the product.
+    text: Designed and introduced an integration testing framework and synthetic model generator that increased meaningful integration test coverage from fewer than 20 tests to more than 890, significantly improving regression protection across the product.
   - flags: ["cv", "resume"]
     text: Mentored 5+ engineers, led multi-engineer technical initiatives, and influenced architecture and engineering standards through design guidance and technical direction.
