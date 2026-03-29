@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 
 const distDir = path.resolve("dist");
 const basePath = normalizeBasePath(process.env.BASE_PATH || "/");
-const port = Number(process.env.PDF_PORT || "4173");
+const requestedPort = Number(process.env.PDF_PORT || "0");
 const execFileAsync = promisify(execFile);
 
 const pdfTargets = [
@@ -31,7 +31,7 @@ await Promise.all(
 
 const server = http.createServer(async (req, res) => {
   try {
-    const requestUrl = new URL(req.url || "/", `http://127.0.0.1:${port}`);
+    const requestUrl = new URL(req.url || "/", `http://127.0.0.1`);
     const filePath = await resolveFilePath(requestUrl.pathname);
     const buffer = await fs.readFile(filePath);
 
@@ -46,17 +46,19 @@ const server = http.createServer(async (req, res) => {
 
 await new Promise((resolve, reject) => {
   server.once("error", reject);
-  server.listen(port, "127.0.0.1", resolve);
+  server.listen(requestedPort, "127.0.0.1", resolve);
 });
 
 try {
+  const address = server.address();
+  const activePort = typeof address === "object" && address ? address.port : requestedPort;
   const browserExecutablePath = getBrowserExecutablePath();
 
   if (browserExecutablePath?.toLowerCase().endsWith(".exe")) {
     for (const target of pdfTargets) {
       await generatePdfViaCli(
         browserExecutablePath,
-        `http://127.0.0.1:${port}${basePath}${target.route}`,
+        `http://127.0.0.1:${activePort}${basePath}${target.route}`,
         getDistOutputFile(target.filename),
       );
     }
@@ -69,7 +71,7 @@ try {
       for (const target of pdfTargets) {
         const page = await browser.newPage();
 
-        await page.goto(`http://127.0.0.1:${port}${basePath}${target.route}`, {
+        await page.goto(`http://127.0.0.1:${activePort}${basePath}${target.route}`, {
           waitUntil: "networkidle",
         });
 
