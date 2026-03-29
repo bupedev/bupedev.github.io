@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Experience">
+  <h1>Experience</h1>
+  <p>
+    I keep a full curriculum vitae and a shorter resume for different contexts. The CV is the comprehensive version
+    of my experience, while the resume will be a more concise summary.
+  </p>
+
+  <div class="experience-links">
+    <a class="experience-link-card" href={`${import.meta.env.BASE_URL}experience/cv/`}>
+      <h2>CV</h2>
+      <p>View my full curriculum vitae.</p>
+    </a>
+
+    <a class="experience-link-card" href={`${import.meta.env.BASE_URL}experience/resume/`}>
+      <h2>Resume</h2>
+      <p>View the shorter resume version.</p>
+    </a>
+  </div>
+</BaseLayout>

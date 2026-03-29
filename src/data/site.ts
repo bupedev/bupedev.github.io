@@ -42,6 +42,6 @@ export const site = {
   ],
   navigation: [
     { title: "Home", href: "/" },
-    { title: "CV", href: "/cv/" },
+    { title: "Experience", href: "/experience/" },
   ],
 } as const;

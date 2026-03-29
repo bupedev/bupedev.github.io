@@ -283,6 +283,31 @@ table td {
   margin: 0 auto;
 }
 
+.experience-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.experience-link-card,
+.experience-link-card:visited {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--grey-color-light);
+  border-radius: 12px;
+  color: var(--text-color);
+}
+
+.experience-link-card:hover {
+  text-decoration: none;
+  border-color: var(--grey-color-dark);
+}
+
+.experience-link-card h2 {
+  margin-bottom: 8px;
+}
+
 .inherits-color,
 .inherits-color:visited {
   color: inherit;
@@ -634,6 +659,10 @@ table td {
   }
 
   .cv-languages {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-links {
     grid-template-columns: 1fr;
   }
 }

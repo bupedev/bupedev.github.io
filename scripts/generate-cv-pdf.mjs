@@ -35,7 +35,7 @@ await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
 
 try {
   const browserExecutablePath = getBrowserExecutablePath();
-  const printUrl = `http://127.0.0.1:${port}${basePath}cv/print/`;
+  const printUrl = `http://127.0.0.1:${port}${basePath}experience/cv/print/`;
 
   if (browserExecutablePath?.toLowerCase().endsWith(".exe")) {
     await generatePdfViaCli(browserExecutablePath, printUrl, distOutputFile);

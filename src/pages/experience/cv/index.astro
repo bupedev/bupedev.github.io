@@ -1,7 +1,7 @@
 ---
-import CvDocument from "../components/CvDocument.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { cvPage, getCvSections } from "../data/cv";
+import CvDocument from "../../../components/CvDocument.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { cvPage, getCvSections } from "../../../data/cv";
 
 const sections = await getCvSections();
 const downloadHref = `${import.meta.env.BASE_URL}generated/ben-lewis-cv.pdf`;
