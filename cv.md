@@ -3,28 +3,28 @@ title: CV
 layout: cv
 permalink: /cv/
 
-job_title: Software Engineer
+job_title: Senior Software Engineer
 
 introduction: >-
-    Software engineer and sessional academic with Applied Mathematics and 
-    Software Engineering degrees from Queensland University of Technology. 
-    Seeking opportunities to better my understanding of software architecture 
-    and design.
+    Senior software engineer with 5+ years of experience designing backend-heavy
+    systems for optimisation and scheduling software. My work focuses on domain
+    modelling, internal DSL design, performance optimisation, and integration
+    test architecture, with end-to-end ownership across architecture,
+    implementation, rollout, and iteration.
 
 programming_tools:
- - "C/C++"
- - ".NET(C#/F#)"
- - "Java"
- - "Python"
- - "Rust"
- - "Javascript"
- - "Typescript"
- - "Matlab"
+ - "C#"
+ - ".NET"
+ - "TypeScript"
+ - "React"
+ - "WinForms"
+ - "SQLite"
+ - "Parquet"
+ - "Power BI"
  - "Git"
- - "Bash"
- - "Powershell"
- - "CMake"
+ - "PowerShell"
  - "Jenkins"
- - "BitBucket"
- - "Atlassian Bamboo"
+ - "Azure DevOps"
+ - "Bitbucket"
+ - "Jira"
 ---

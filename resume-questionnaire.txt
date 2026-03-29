@@ -1,0 +1,208 @@
+Senior/Staff Resume Questionnaire
+=================================
+
+Instructions
+- Write rough notes, not polished prose.
+- Prefer concrete numbers over adjectives.
+- If you do not know an exact number, give your best estimate and mark it as approximate.
+- Keep the focus on impact, scope, technical depth, and ownership.
+
+Question 1: Expression System / DSL Business Problem
+----------------------------------------------------
+What concrete business problem did it solve, and who used it?
+What was the before/after state?
+What became possible once it shipped?
+
+Your answer:
+The core problem with the existing expression system implementation used in a number of our other products is that its user experience was extremely poor. Because the architecture underpinning the existing implementation was so poorly written and maintained, it was infeasible to re-use it as the expression system in our new product without compromising the user experience. Mining engineers using our software are frustrated with how hard the existing expression system implementations are to use, and we wanted to make writing expressions in our new software as painless as possible.
+
+
+The existing expression system implementation systems in my company were held together with bubble-gum and sticky tape. It was a buggy mess that still has serious bugs to this day in places where it still used. It had no formal structure or testing. In most places the user was just presented with a text area where they would type in an expression and hope and pray they don't get a cryptic error message. 
+
+The expression system that I designed and built fixes basically everything wrong with the existing one. The new expression system has:
+* A robust and well-defined data-typing system
+* High adaptation capabilities and is written to be product-agnostic
+* Full localization and translation support for 10+ languages
+* A formal programming language architecture (lexer/parser/analyzer/compiler)
+* Features you would expect from an IDE or good editor (syntax highlighting, tool tips, formatting, linting, etc.)
+
+
+Question 2: Expression System / DSL Technical Complexity
+--------------------------------------------------------
+How complex was the system technically?
+Include specifics such as:
+- parser/interpreter design
+- type system
+- functions supported
+- dependency graphing
+- error handling
+- performance constraints
+- embedding model
+- incremental recomputation or caching
+
+Your answer:
+The new system was reasonably complex internally, but maintained a nice and clean interface to make adoption straightforward. The new system system: 
+* Was architected as a pipeline that could move an expression from one representation to another. For example string -> tokens -> parse-tree -> AST -> compiled. 
+* Featured a robust and well defined type system that supported type inference.
+* Had support for custom functions, variables and constants.
+* Has full localization and translation support for 10+ languages.
+* Was written in a completely product agnostic way to make adaption seamless.
+* Has a robust location-aware error detection system with linting
+* Had modern IDE features such as syntax highlighting, auto-complete and tooltips
+
+
+Question 3: Expression System / DSL Impact
+------------------------------------------
+What measurable impact did the DSL have?
+Examples:
+- number of users
+- workflows powered
+- products adopted by
+- reduction in manual work
+- faster configuration
+- fewer defects
+- engineering time saved through reuse
+
+Your answer:
+* Better user experience (purely anecdotal)
+* Fewer bugs and unexplainable behaviour
+* More comfort for users in other languages
+* Great ease in extending the expression system as required
+
+
+Question 4: Reuse / Cross-Product Adoption
+------------------------------------------
+For the abstraction/reuse work:
+- How many products or teams adopted it?
+- Was adoption something you drove directly?
+- Did you create a reusable component, or a broader platform capability?
+
+Your answer:
+* 3-4 other products in our company have full, partially adopted our system or are planning to integrate it in the near future.
+* I encouraged adoption where I could. My philosophy was to build something easily adaptable and allow other products to pick it up if they desired it.
+
+
+Question 5: Deswik.BOLT / Deswik.GO Integrations
+------------------------------------------------
+What was technically hard about these integrations?
+Examples:
+- data modelling
+- interoperability
+- scheduling constraints
+- performance
+- correctness
+- versioning
+- failure handling
+
+Also clarify whether you designed the integration architecture or mainly implemented it.
+
+Your answer:
+I both designed and implemented the integrations. The key challenge was ensuring that the semantic meaning of the configuration in our product was faithfully mapped to the BOLT. This came with some additional challenges such as orchestrating large scale computations for haulage modelling and parcel flow attribute value calculation. This data is big and we have to ensure it is completed in a reasonable time and shaped appropriately before sending it to BOLT.
+
+
+Question 6: System Scale
+------------------------
+What scale were your systems operating at?
+Include concrete dimensions where possible:
+- size of datasets
+- number of entities / jobs / schedules processed
+- runtime expectations
+- memory or performance limits
+- number of internal or external users
+- frequency of execution
+
+Your answer:
+Reasonably large data. Input files frequently surpass 1 GB. After configuring models we needed to ensure that the core processing that our application does is in a reasonable time frame. Users way be willing to wait up to 15 minutes for a solve if their data is big. We've had situations where we had to do some serious optimizations to decrease runtime from hours down to minutes (parallelization, data structures, etc.). We only just release the product so we only have on external client, but we have at least a dozen internal consultants already using it.
+
+
+Question 7: Strongest Performance Optimisation Example
+------------------------------------------------------
+What was slow?
+How did you diagnose it?
+What changes did you make?
+What was the result in numbers?
+
+Examples:
+- runtime reduced by X%
+- memory reduced by Y%
+- workflow time from A to B
+
+Your answer:
+Calculations for parcel flow field calculations (these are formula calculations -- associated with the aforementioned expression system -- that apply to each parcel of material out of the pit, on each potential leg of its journey around the mine, in each potential time step). There are two key performance problems when dealing with this kind of data, fields may be dependent on one another so you need to ensure you are evaluating them in the correct order. Data can get very big (max total data points = P (number of parcels) * F (number of fields) * L (number of flow links -- transport legs) * T (number of time steps). The first of the problems is solved by arranging fields into a dependency graph, sorting the graph topologically, and evaluating fields in parallel (new field calculations are unlocked when all of their predecessors are complete). The second of the problems is a matter of analysing the expressions used for each of the fields to see how they vary in terms of flow links and time steps and minimizing the distinct number of flow-link-time-step permutations that need to be evaluated for a given field. Results are also cached in this manner. In applying the optimizations mentioned, I was able to reduce the time and space required parcel flow field calculations by 1000 times in typical client models.
+
+
+Question 8: Integration Testing Framework / Synthetic Model Generator
+---------------------------------------------------------------------
+What pain did this replace?
+Be precise:
+- flaky manual QA
+- slow release cycles
+- low confidence in scheduling workflows
+- hard-to-reproduce bugs
+- something else
+
+Then quantify the outcome if you can.
+
+Your answer:
+* Difficulty in defining test cases. Developers were writing the same old boilerplate to write their integration tests and it was getting hard to tell which examples to follow.
+* Generally poor integration coverage. Developers were scared to write integration tests because it would take too long.
+
+The integration testing framework and synthetic model generator I crafted make it extremely easy to craft a test case that makes various configurations to a simple project, runs the solve and verifies the result. In the past year since introducing the system, we have enabled to team to write over 890+ meaningful integration tests. Integration tests are also a requirement when fixing bugs that are seen as a regression. The product is consequently much more stable.
+
+
+Question 9: Ownership Scope
+---------------------------
+What was your ownership scope in your best projects?
+Did you own:
+- requirements
+- architecture
+- implementation
+- rollout
+- observability
+- support
+- iteration
+
+Separate technical ownership from strong contribution where relevant.
+
+Your answer:
+The my best projects I had ownership over everything but business requirements.
+
+
+Question 10: Leadership Evidence
+--------------------------------
+What leadership evidence is actually resume-worthy?
+Examples:
+- mentored how many engineers
+- led design reviews
+- set engineering standards
+- unblocked other teams
+- influenced roadmap or technical direction
+- acted as de facto lead before promotion
+
+Your answer:
+* I've mentored 5+ engineers in my 5 years at the company and I have strong confidence that each of those engineers were steered in the correct direction.
+* I frequently influence technical direction and encourage good architectural decisions where I am permitted.
+* I have acted as a leader from early on, even when I was just a graduate.
+
+
+Question 11: Team / Org Context
+-------------------------------
+How big were the teams and org around you?
+Give approximate numbers for:
+- immediate team size
+- cross-functional collaborators
+- whether you worked directly with product managers, domain experts, researchers, or customers
+
+Your answer:
+* My company (Deswik) employs 450+
+* I currently operate in a team of 9 and have frequently collaborated with other teams for a number of features.
+* I am in one of two teams (of similar size) working on a cutting-edge mine planning software Deswik.NOVA.
+* I've worked directly with product managers and customers to solve a number of problems
+
+Question 12: Top 3 Resume Achievements
+--------------------------------------
+What are the top 3 projects or achievements you want a hiring manager to remember after a 30-second scan?
+If these are not the DSL, integrations, and testing framework, say so.
+
+Your answer:
+Basically the ones I said already.
