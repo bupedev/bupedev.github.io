@@ -461,10 +461,16 @@ table td {
   page-break-after: avoid;
 }
 
-.cv-print-page .cv-entry {
+.cv-print-page .cv-entry-core--keep {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.cv-print-page .cv-entry-tail {
   break-inside: auto;
   page-break-inside: auto;
 }
+
 
 .sr-only {
   position: absolute;

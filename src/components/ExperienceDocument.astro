@@ -15,6 +15,7 @@ const hasEntries = sections.education.length > 0 || sections.work.length > 0 || 
 const hasSupplementaryContent =
   page.skillGroups.length > 0 || page.languages.length > 0 || page.jobTitle || page.introduction || page.closingNote;
 const isEmpty = !hasEntries && !hasSupplementaryContent;
+const splitEntryId = "work/4_sessional-academic";
 ---
 
 {!isEmpty ? (
@@ -51,16 +52,27 @@ const isEmpty = !hasEntries && !hasSupplementaryContent;
       <div class="cv-section">
         <hr />
         <h2>Work Experience</h2>
-        {sections.work.map((entry) => (
-          <article class="cv-entry">
-            <h3 class="cv-close-header">{entry.data.title}</h3>
-            <p class="cv-close-header">{entry.data.location}</p>
-            <sup>
-              {entry.data.start_date} - {entry.data.end_date}
-            </sup>
-            <ExperienceBulletList bullets={entry.data.bullets} />
-          </article>
-        ))}
+        {sections.work.map((entry) => {
+          const shouldSplitTail = entry.id === splitEntryId && entry.data.bullets.length > 2;
+
+          return (
+            <article class="cv-entry">
+              <div class:list={["cv-entry-core", shouldSplitTail && "cv-entry-core--keep"]}>
+                <h3 class="cv-close-header">{entry.data.title}</h3>
+                <p class="cv-close-header">{entry.data.location}</p>
+                <sup>
+                  {entry.data.start_date} - {entry.data.end_date}
+                </sup>
+                <ExperienceBulletList bullets={shouldSplitTail ? entry.data.bullets.slice(0, 2) : entry.data.bullets} />
+              </div>
+              {shouldSplitTail ? (
+                <div class="cv-entry-tail">
+                  <ExperienceBulletList bullets={entry.data.bullets.slice(2)} />
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
       </div>
     ) : null}
 
