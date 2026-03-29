@@ -11,7 +11,7 @@ export const site = {
   socials: [
     {
       name: "LinkedIn",
-      id: "lewisbj",
+      id: "bupedev",
       url: "linkedin.com/in/",
       icon: "fa-brands fa-linkedin",
     },

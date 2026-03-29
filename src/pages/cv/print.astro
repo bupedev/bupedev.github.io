@@ -1,0 +1,11 @@
+---
+import CvDocument from "../../components/CvDocument.astro";
+import PrintLayout from "../../layouts/PrintLayout.astro";
+import { cvPage, getCvSections } from "../../data/cv";
+
+const sections = await getCvSections();
+---
+
+<PrintLayout title={`${cvPage.title} Print`}>
+  <CvDocument cvPage={cvPage} sections={sections} />
+</PrintLayout>

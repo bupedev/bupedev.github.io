@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/generate-cv-pdf.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "astro": "^5.6.1",
+    "playwright": "^1.53.2",
     "typescript": "^5.9.3"
   }
 }
