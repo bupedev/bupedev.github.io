@@ -48,21 +48,21 @@ export const experiencePage: ExperiencePageContent = {
       flags: ["cv", "resume"],
       value: {
         title: "Languages",
-        items: ["C#", "TypeScript", "SQL", "PowerShell"],
+        items: ["C#", "Rust", "TypeScript", "SQL", "PowerShell", "Bash"],
       },
     },
     {
       flags: ["cv", "resume"],
       value: {
         title: "Platforms/Frameworks",
-        items: [".NET", "React", "WinForms"],
+        items: ["ASP.NET", "React", "WinForms"],
       },
     },
     {
       flags: ["cv", "resume"],
       value: {
         title: "Data/Storage",
-        items: ["SQLite", "Parquet"],
+        items: ["PostgreSQL", "SQLite", "Parquet"],
       },
     },
     {
@@ -76,7 +76,7 @@ export const experiencePage: ExperiencePageContent = {
       flags: ["cv", "resume"],
       value: {
         title: "Testing/Architecture",
-        items: ["integration testing", "domain modeling", "DSL design", "performance optimization"],
+        items: ["integration testing", "domain modeling", "performance optimization"],
       },
     },
   ],
@@ -92,8 +92,9 @@ export const experiencePage: ExperiencePageContent = {
   ],
   closingNote: {
     flags: ["cv"],
-    value:
-      "I have chosen to omit references from this rendition of my curriculum vitae to ensure my references are not unduly contacted. I will gladly provide references to recruiters or potential employers upon request.",
+    value: ""
+    // value:
+    //   "I have chosen to omit references from this rendition of my curriculum vitae to ensure my references are not unduly contacted. I will gladly provide references to recruiters or potential employers upon request."
   },
 };
 
@@ -148,8 +149,8 @@ export async function getExperienceSections(exposure: ExposureFlag) {
     .filter((entry) => entry.data.bullets.length > 0);
 
   return {
-    education: includedEntries.filter((entry) => entry.id.startsWith("education/")).sort(sortEntries),
     work: includedEntries.filter((entry) => entry.id.startsWith("work/")).sort(sortEntries),
+    education: includedEntries.filter((entry) => entry.id.startsWith("education/")).sort(sortEntries),
     volunteer: includedEntries.filter((entry) => entry.id.startsWith("volunteer/")).sort(sortEntries),
   };
 }
