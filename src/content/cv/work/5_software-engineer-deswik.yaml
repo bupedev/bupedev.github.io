@@ -5,6 +5,8 @@ end_date: Present
 flags: ["cv", "resume"]
 bullets:
   - flags: ["cv", "resume"]
+    text: "Core stack: C#/ASP.NET (Backend), TypeScript/React (Frontend)"
+  - flags: ["cv", "resume"]
     text: Promoted from Graduate Software Engineer to Software Engineer and then Senior Software Engineer while contributing across optimisation and surface planning products.
   - flags: ["cv", "resume"]
     text: Designed and delivered a reusable expression-language platform for optimisation and planning workflows, replacing fragile legacy implementations with a structured pipeline for parsing, analysis, compilation, type inference, linting, and diagnostics.
