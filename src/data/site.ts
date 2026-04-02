@@ -3,8 +3,6 @@ export const site = {
   author: "Ben Lewis",
   email: "ben@bupe.dev",
   location: "Brisbane, Australia",
-  description:
-    "Software engineer from Brisbane, Australia, currently building strategic mine planning software for Deswik. When I am not spending time with my wife and two beautiful children, I enjoy creative coding and making generative art.",
   domain: "bupe.dev",
   url: "https://bupe.dev",
   socials: [
@@ -41,6 +39,7 @@ export const site = {
   ],
   navigation: [
     { title: "Home", href: "/" },
+    { title: "Blog", href: "/blog/" },
     { title: "Experience", href: "/experience/" },
   ],
 } as const;
