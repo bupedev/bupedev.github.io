@@ -1,3 +1,5 @@
+const blogEnabled = false;
+
 export const site = {
   title: "Ben Lewis (@bupedev)",
   author: "Ben Lewis",
@@ -5,6 +7,9 @@ export const site = {
   location: "Brisbane, Australia",
   domain: "bupe.dev",
   url: "https://bupe.dev",
+  features: {
+    blogEnabled,
+  },
   socials: [
     {
       name: "LinkedIn",
@@ -39,7 +44,7 @@ export const site = {
   ],
   navigation: [
     { title: "Home", href: "/" },
-    { title: "Blog", href: "/blog/" },
+    ...(blogEnabled ? [{ title: "Blog", href: "/blog/" }] : []),
     { title: "Experience", href: "/experience/" },
   ],
 } as const;

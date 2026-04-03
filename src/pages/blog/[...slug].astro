@@ -1,0 +1,180 @@
+---
+import { getCollection, render } from "astro:content";
+import "katex/dist/katex.min.css";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  if (!site.features.blogEnabled) {
+    return [];
+  }
+
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const formatDate = (value: Date) =>
+  value.toLocaleDateString("en-AU", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<BaseLayout title={post.data.title}>
+  <article class="blog-post">
+    <header class="blog-post-header">
+      <h1>{post.data.title}</h1>
+      <p class="blog-post-meta">
+        Published{" "}
+        <time datetime={post.data.publishedAt.toISOString()}>
+          {formatDate(post.data.publishedAt)}
+        </time>
+        {post.data.lastEditedAt && (
+          <>
+            {" "}
+            · Last edited{" "}
+            <time datetime={post.data.lastEditedAt.toISOString()}>
+              {formatDate(post.data.lastEditedAt)}
+            </time>
+          </>
+        )}
+      </p>
+
+      {post.data.tags.length > 0 && (
+        <ul class="blog-tag-list" aria-label="Tags">
+          {post.data.tags.map((tag) => (
+            <li class="blog-tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <div class="blog-post-content">
+      <Content />
+    </div>
+  </article>
+
+  <script is:inline>
+    (() => {
+      const headings = document.querySelectorAll(".blog-post-content h2[id], .blog-post-content h3[id], .blog-post-content h4[id]");
+
+      for (const heading of headings) {
+        if (!(heading instanceof HTMLElement)) {
+          continue;
+        }
+
+        if (heading.closest(".footnotes")) {
+          continue;
+        }
+
+        if (heading.querySelector(".section-anchor")) {
+          continue;
+        }
+
+        const anchor = document.createElement("a");
+        anchor.className = "section-anchor";
+        anchor.href = `#${heading.id}`;
+        anchor.setAttribute("aria-label", `Link to section ${heading.textContent?.trim() ?? ""}`.trim());
+        anchor.setAttribute("title", "Link to this section");
+        heading.append(anchor);
+      }
+
+      const codeBlocks = document.querySelectorAll(".blog-post-content pre.astro-code");
+      for (const codeBlock of codeBlocks) {
+        if (!(codeBlock instanceof HTMLElement)) {
+          continue;
+        }
+
+        if (codeBlock.querySelector(".code-fence-copy")) {
+          continue;
+        }
+
+        const code = codeBlock.querySelector("code");
+        if (!(code instanceof HTMLElement)) {
+          continue;
+        }
+
+        const copyButton = document.createElement("button");
+        copyButton.type = "button";
+        copyButton.className = "code-fence-copy";
+        copyButton.innerHTML = '<i class="fa-solid fa-copy" aria-hidden="true"></i>';
+        copyButton.setAttribute("aria-label", "Copy code to clipboard");
+
+        let resetLabelTimer;
+        copyButton.addEventListener("click", async () => {
+          const codeText = (code.textContent ?? "").replace(/\n$/, "");
+          if (!codeText) {
+            return;
+          }
+
+          const copyUsingSelectionFallback = () => {
+            const textArea = document.createElement("textarea");
+            textArea.value = codeText;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.append(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            textArea.remove();
+          };
+
+          try {
+            if (navigator.clipboard?.writeText) {
+              await navigator.clipboard.writeText(codeText);
+            } else {
+              copyUsingSelectionFallback();
+            }
+          } catch {
+            copyUsingSelectionFallback();
+          }
+
+          copyButton.dataset.state = "idle";
+          void copyButton.offsetWidth;
+          copyButton.dataset.state = "copied";
+
+          clearTimeout(resetLabelTimer);
+          resetLabelTimer = setTimeout(() => {
+            copyButton.dataset.state = "idle";
+          }, 1500);
+        });
+
+        copyButton.dataset.state = "idle";
+        codeBlock.prepend(copyButton);
+      }
+
+      const paragraphs = document.querySelectorAll(".blog-post-content .footnotes li > p");
+
+      for (const paragraph of paragraphs) {
+        if (!(paragraph instanceof HTMLElement)) {
+          continue;
+        }
+
+        const backref = paragraph.querySelector("a[data-footnote-backref], a.data-footnote-backref, a.footnote-backref");
+        if (!(backref instanceof HTMLAnchorElement)) {
+          continue;
+        }
+
+        backref.classList.add("footnote-backref");
+        backref.textContent = "^";
+
+        const trailing = paragraph.lastChild;
+        if (trailing && trailing.nodeType === Node.TEXT_NODE) {
+          trailing.textContent = (trailing.textContent ?? "").replace(/\s+$/, "");
+        }
+
+        if (paragraph.firstChild !== backref) {
+          backref.remove();
+          paragraph.insertBefore(document.createTextNode(" "), paragraph.firstChild);
+          paragraph.insertBefore(backref, paragraph.firstChild);
+        }
+      }
+    })();
+  </script>
+</BaseLayout>

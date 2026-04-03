@@ -2,15 +2,14 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const exposureFlag = z.enum(["cv", "resume"]);
-const bulletSchema: z.ZodType<{
+
+type CvBullet = {
   flags: Array<"cv" | "resume">;
   text: string;
-  children?: Array<{
-    flags: Array<"cv" | "resume">;
-    text: string;
-    children?: unknown[];
-  }>;
-}> = z.object({
+  children?: CvBullet[];
+};
+
+const bulletSchema: z.ZodType<CvBullet> = z.object({
   flags: z.array(exposureFlag),
   text: z.string(),
   children: z.array(z.lazy(() => bulletSchema)).optional(),
@@ -28,4 +27,14 @@ const cv = defineCollection({
   }),
 });
 
-export const collections = { cv };
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    publishedAt: z.coerce.date(),
+    lastEditedAt: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { cv, blog };

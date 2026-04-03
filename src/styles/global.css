@@ -147,8 +147,8 @@ pre {
 
 pre > code {
   border: 0;
-  padding-right: 0;
-  padding-left: 0;
+  padding: 0;
+  background-color: transparent;
 }
 
 .wrapper {
@@ -288,6 +288,286 @@ table td {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   margin-top: 30px;
+}
+
+.blog-directory {
+  margin-top: 24px;
+}
+
+.blog-directory-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.blog-directory-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--grey-color-light);
+}
+
+.blog-directory-item:last-child {
+  border-bottom: 0;
+}
+
+.blog-directory-link,
+.blog-directory-link:visited {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.blog-post {
+  max-width: 720px;
+}
+
+.blog-post-header {
+  margin-bottom: 28px;
+}
+
+.blog-post-meta {
+  margin-top: 12px;
+  color: var(--grey-color);
+}
+
+.blog-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 12px 0 0;
+}
+
+.blog-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #244d8f;
+  font-size: 0.9rem;
+}
+
+.blog-post-content :where(h2, h3, h4) {
+  position: relative;
+  margin-top: 32px;
+  scroll-margin-top: 90px;
+}
+
+.blog-post-content .section-anchor,
+.blog-post-content .section-anchor:visited {
+  margin-left: 8px;
+  opacity: 0;
+  color: var(--brand-color);
+  text-decoration: none;
+  transition: opacity 90ms ease;
+}
+
+.blog-post-content .section-anchor::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f0c1";
+  font-size: 0.75em;
+  vertical-align: middle;
+}
+
+.blog-post-content :where(h2, h3, h4):hover .section-anchor,
+.blog-post-content :where(h2, h3, h4):focus-within .section-anchor,
+.blog-post-content .section-anchor:focus-visible {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .blog-post-content .section-anchor {
+    opacity: 1;
+  }
+}
+
+.blog-post-content .footnotes {
+  margin-top: 40px;
+  padding-top: 14px;
+  border-top: 1px solid var(--grey-color-light);
+  font-size: 0.9rem;
+  color: var(--grey-color-dark);
+}
+
+.blog-post-content sup a[data-footnote-ref] {
+  text-decoration: none;
+}
+
+.blog-post-content sup a[data-footnote-ref]::before {
+  content: "[";
+}
+
+.blog-post-content sup a[data-footnote-ref]::after {
+  content: "]";
+}
+
+.blog-post-content sup:has(> a[data-footnote-ref]:target),
+.blog-post-content .footnotes li:target {
+  background-color: #def;
+}
+
+.blog-post-content .footnotes > .sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 0 12px;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border: 0;
+  padding: 0;
+}
+
+.blog-post-content .footnotes ol {
+  margin-top: 12px;
+}
+
+.blog-post-content .footnotes li {
+  border-radius: 3px;
+  padding: 1px 3px;
+  margin: 2px 0;
+}
+
+.blog-post-content .footnotes li > p {
+  margin-bottom: 0;
+}
+
+.blog-post-content .footnote-backref,
+.blog-post-content .data-footnote-backref {
+  margin-right: 0;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.blog-post-content pre.astro-code {
+  position: relative;
+}
+
+.blog-post-content .code-fence-copy {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(216, 224, 234, 0.72);
+  padding: 0;
+  font-size: 0.86rem;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.blog-post-content .code-fence-copy::after {
+  content: "Copied!";
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  transform: translateY(-50%) translateX(4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  background: rgba(20, 25, 32, 0.86);
+  color: #edf5ff;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  padding: 3px 7px;
+}
+
+.blog-post-content .code-fence-copy:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #d8e0ea;
+}
+
+.blog-post-content .code-fence-copy:focus-visible {
+  outline: 2px solid #8ab4f8;
+  outline-offset: 2px;
+  border-color: rgba(255, 255, 255, 0.34);
+  color: #d8e0ea;
+}
+
+.blog-post-content .code-fence-copy[data-state="copied"]::after {
+  animation: code-copy-toast 1300ms ease-out 1;
+}
+
+@keyframes code-copy-toast {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) translateX(4px);
+  }
+
+  14% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-2px);
+  }
+}
+
+.blog-post-content .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0;
+}
+
+.blog-post-content .blog-figure-half {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.blog-post-content .blog-figure-wrap-right {
+  float: right;
+  width: min(46%, 360px);
+  margin: 0 0 16px 20px;
+}
+
+.blog-post-content .blog-figure-wrap-left {
+  float: left;
+  width: min(46%, 360px);
+  margin: 0 20px 16px 0;
+}
+
+.blog-post-content .blog-float-clear {
+  clear: both;
+}
+
+.blog-post-content .blog-figure-card {
+  background: #f7f9fc;
+  border: 1px solid #dfe6ef;
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.08);
+}
+
+.blog-post-content .blog-figure-card > img {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+}
+
+.blog-post-content .blog-figure-card > figcaption {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  color: #5b6675;
+  line-height: 1.35;
 }
 
 .experience-link-card,
@@ -737,6 +1017,17 @@ table td {
   .home-art-feature {
     margin-right: auto;
     text-align: center;
+  }
+
+  .blog-post-content .blog-figure-half {
+    max-width: 100%;
+  }
+
+  .blog-post-content .blog-figure-wrap-right,
+  .blog-post-content .blog-figure-wrap-left {
+    float: none;
+    width: 100%;
+    margin: 0 0 16px;
   }
 
   .cv-name-row {
